@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruben Schlonsak - Researcher & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="pics/self.png" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .section {
+            scroll-margin-top: 70px;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .card-bg {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card-bg:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #3a86ff, #8338ec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 20%, #3a86ff 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #8338ec 0%, transparent 50%);
+            background-size: 800px 800px;
+            background-position: 0 0, 400px 400px;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0 0, 400px 400px; }
+            50% { background-position: 400px 400px, 0 0; }
+            100% { background-position: 0 0, 400px 400px; }
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 0 6px 6px 0;
+            transition: all 0.2s ease;
+        }
+        
+        .tech-tag:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .typing-effect {
+            border-right: 2px solid white;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-right-color: white; }
+            51%, 100% { border-right-color: transparent; }
+        }
+        
+        .tab-active {
+            background: var(--primary-color);
+        }
+        
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .dark-mode {
+            background-color: #0f172a;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(58, 134, 255, 0.3);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.2), rgba(131, 56, 236, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hexagon {
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .reel-container {
+            perspective: 1000px;
+        }
+        
+        .reel {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateReel 20s linear infinite;
+        }
+       .text-3d {
+            position: absolute;      /* deckt die ganze Reel ab */
+            inset: 0;
+            transform-style: preserve-3d;
+        }
+
+        /* Beide Seiten exakt übereinander stapeln */
+        .text-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;   /* jeder Seite nur ihre Front */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Rückseite 180° um Y-Achse drehen */
+        .text-face.back {
+            transform: rotateY(180deg);
+        }
+        @keyframes rotateReel {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300 transition-colors duration-300">
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header id="header" class="bg-gray-900/90 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 transition-shadow duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-white flex items-center">
+                <span class="mr-2 text-2xl font-bold">R</span>
+                <span>S</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-white transition-colors">Skills</a>
+                <a href="#research" class="nav-link text-gray-300 hover:text-white transition-colors">Research</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-white transition-colors">Projects</a>
+                <a href="#open topics" class="nav-link text-gray-300 hover:text-white transition-colors">Topics</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="dark-mode-toggle" class="text-gray-300 hover:text-white transition-colors">
+                    <svg class="w-6 h-6 hidden" id="dark-mode-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <svg class="w-6 h-6" id="light-mode-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/95 backdrop-blur-sm">
+            <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-800">About</a>
+            <a href="#skills" class="block py-2 px-6 text-sm hover:bg-gray-800">Skills</a>
+            <a href="#research" class="block py-2 px-6 text-sm hover:bg-gray-800">Research</a>
+            <a href="#projects" class="block py-2 px-6 text-sm hover:bg-gray-800">Projects</a>
+            <a href="#blog" class="block py-2 px-6 text-sm hover:bg-gray-800">Blog</a>
+            <a href="#contact" class="block py-2 px-6 text-sm hover:bg-gray-800">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-24">
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen flex items-center section relative overflow-hidden">
+            <div class="absolute inset-0 bg-pattern opacity-15"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full relative z-10">
+                <div class="flex flex-col justify-center">
+                    <div class="animated-text mb-4">
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-none mb-6">
+                            Bridging Human Motion
+                            <br>
+                            <span class="gradient-text bg-clip-text text-transparent">and Artificial Intelligence</span>
+                        </h1>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-lg md:text-xl text-gray-300 mb-8">
+                            <span id="typing-text" class="typing-effect"></span>
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="#research" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden">
+                            <span class="relative z-10 flex items-center">
+                                My Research
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            </span>
+                            <div class="absolute top-0 left-0 w-full h-full bg-white opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
+                        </a>
+                        <a href="#contact" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                            <span class="flex items-center">
+                                Get In Touch
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-400">
+                        <span class="mr-4">↓ Scroll to explore</span>
+                        <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:flex items-center justify-center">
+                    <div class="relative animate-float">
+                        <div class="w-72 h-72 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 shadow-xl">
+                            <div class="w-full h-full rounded-full overflow-hidden bg-gray-900 relative">
+                                <img src="pics/self.png" alt="Ruben Schlonsak" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-30"></div>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-gray-800 rounded-lg shadow-lg p-4 border border-blue-500/30">
+                            <div class="flex items-center">
+                                <div class="flex items-center text-sm">
+                                    <svg class="w-5 h-5 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <span class="font-medium">Researcher & Developer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive visualization - left sidebar for mobile -->
+                <div class="lg:hidden absolute bottom-10 right-4 w-32 h-32">
+                    <canvas id="sensor-visualization" width="140" height="140"></canvas>
+                </div>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="absolute top-10 left-10 w-16 h-16 rounded-full bg-blue-500/20 animate-pulse-slow"></div>
+            <div class="absolute bottom-20 right-20 w-20 h-20 rounded-full bg-purple-500/20 animate-pulse-slow" style="animation-delay: 1s"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 section">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">About Me</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Research bringing AI and human activity together through innovative technology</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2 space-y-6">
+                    <div class="service-card card-bg p-6 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Research</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            I'm a researcher at <strong>Technische Hochschule Lübeck</strong> focused on developing innovative sensor technology, especially smart footwear, to create robust algorithms for human activity recognition. My work pushes the boundaries of how AI can understand and interpret human movement patterns in real-world environments.
+                        </p>
+                    </div>
+                    
+                    <div class="service-card card-bg p-6 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Expertise</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            My research interests include real-time activity recognition with multisensory systems, surface identification using capacitive sensing, and applications in healthcare, sports, and autonomous systems. I specialize in bringing AI to edge devices like smart footwear to enable efficient on-device processing.
+                        </p>
+                    </div>
+                    
+                    <div class="service-card card-bg p-6 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.375 3.375 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Beyond Research</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            When I'm not immersed in research, I find balance through music and creative expression. Playing guitar provides a creative counterpoint to my analytical work, helping me maintain creativity and perspective in my technical pursuits.
+                        </p>
+                    </div>
+                </div>
+                
+               <div class="reel-container flex items-center justify-center">
+                    <!-- Dreht die komplette Einheit -->
+                    <div class="reel animate-spin-3d relative w-40 h-56">
+                        
+                        <!-- Zwei 3-D-Gesichter (Front & Back) -->
+                        <div class="text-3d w-full h-full">
+                        
+                        <!-- Vorderseite -->
+                        <div class="text-face front flex flex-col items-center justify-center">
+                            <img src="pics/shoe.png" alt="Rotating Smart Shoe" class="w-32 h-32 mb-2" />
+                            <h3 class="text-3xl font-extrabold text-white text-center leading-snug tracking-tight">Smart Footwear</h3>
+                            <p class="mt-1 text-base text-gray-300 text-center leading-tight tracking-normal max-w-[11rem]">
+                            Edge-AI-based<br/>Activity&nbsp;Recognition
+                            </p>
+                        </div>
+
+                        <!-- Rückseite (lesbar dank 180°-Drehung) -->
+                        <div class="text-face back flex flex-col items-center justify-center">
+                            <img src="pics/shoe.png" alt="" class="w-32 h-32 mb-2" />
+                            <h3 class="text-3xl font-extrabold text-white text-center leading-snug tracking-tight">Smart Footwear</h3>
+                            <p class="mt-1 text-base text-gray-300 text-center leading-tight tracking-normal max-w-[11rem]">
+                            Edge-AI-based<br/>Activity&nbsp;Recognition
+                            </p>
+                        </div>
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 section bg-gray-800/20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Skills & Expertise</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Combining technical knowledge with research expertise to develop innovative solutions</p>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="tabs flex flex-wrap justify-center mb-8 gap-2">
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-blue-600/20 text-blue-400 tab-active" data-tab="technical">Technical</button>
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-tab="research">Research</button>
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-tab="soft">Soft Skills</button>
+                </div>
+                
+                <!-- Technical Skills -->
+                <div id="technical" class="tab-content">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">ML/AI</h3>
+                            <p class="text-sm mt-4 text-gray-400">PyTorch, TensorFlow, Keras</p>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Python</h3>
+                            <p class="text-sm mt-4 text-gray-400">NumPy, Pandas, SciPy</p>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Data Science</h3>
+                            <p class="text-sm mt-4 text-gray-400">Matplotlib, Scikit-learn</p>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Web Dev</h3>
+                            <p class="text-sm mt-4 text-gray-400">JavaScript, React, Node.js</p>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Security</h3>
+                            <p class="text-sm mt-4 text-gray-400">Ethical Hacking, Encryption</p>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg text-center">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-500/10 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">DevOps</h3>
+                            <p class="text-sm mt-4 text-gray-400">Docker, Kubernetes, CI/CD</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-6">Technical Proficiency</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>Deep Learning</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                        <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 0%;" data-width="90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>Signal Processing</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                        <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 0%;" data-width="85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-6">Language Skills</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>German (Native)</span>
+                                        <span>100%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                        <div class="skill-bar bg-purple-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span>English (Fluent)</span>
+                                        <span>95%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                        <div class="skill-bar bg-purple-600 h-2.5 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-6">Research Impact</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-300">Citations</span>
+                                    <span class="text-3xl font-bold text-blue-400">124+</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-300">Papers</span>
+                                    <span class="text-3xl font-bold text-blue-400">12</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-300">Projects</span>
+                                    <span class="text-3xl font-bold text-blue-400">5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Research Skills -->
+                <div id="research" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="service-card card-bg p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-white mb-4">Research Focus Areas</h3>
+                            <div class="flex flex-wrap">
+                                <span class="tech-tag">Human Activity Recognition</span>
+                                <span class="tech-tag">Smart Footwear</span>
+                                <span class="tech-tag">Edge Computing</span>
+                                <span class="tech-tag">Sensor Fusion</span>
+                                <span class="tech-tag">Real-Time Processing</span>
+                                <span class="tech-tag">Capacitive Sensing</span>
+                                <span class="tech-tag">Autonomous Systems</span>
+                                <span class="tech-tag">Healthcare Applications</span>
+                            </div>
+                            <div class="mt-6">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400">Industry Experience</span>
+                                    <span class="text-green-400">Autonomous Systems</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400">Academic Focus</span>
+                                    <span class="text-blue-400">Human Motion Analysis</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-card card-bg p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-white mb-4">Publications</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <div class="text-3xl font-bold text-blue-400 mb-2">3</div>
+                                    <div class="text-gray-400 text-sm">Journal Papers</div>
+                                </div>
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <div class="text-3xl font-bold text-purple-400 mb-2">5</div>
+                                    <div class="text-gray-400 text-sm">Conference Papers</div>
+                                </div>
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <div class="text-3xl font-bold text-green-400 mb-2">4</div>
+                                    <div class="text-gray-400 text-sm">Workshops</div>
+                                </div>
+                                <div class="bg-gray-800/50 p-4 rounded-lg">
+                                    <div class="text-3xl font-bold text-yellow-400 mb-2">2</div>
+                                    <div class="text-gray-400 text-sm">Patents</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Soft Skills -->
+                <div id="soft" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4">Communication & Collaboration</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Technical Writing</h4>
+                                        <p class="text-gray-400 text-sm">Experienced researcher with multiple published papers</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Public Speaking</h4>
+                                        <p class="text-gray-400 text-sm">Regular presenter at technical conferences and workshops</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Team Player</h4>
+                                        <p class="text-gray-400 text-sm">Proven experience in collaborative projects across domains</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4">Personal Attributes</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.375 3.375 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Critical Thinking</h4>
+                                        <p class="text-gray-400 text-sm">Analytical approach to complex problem solving</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5-5"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Attention to Detail</h4>
+                                        <p class="text-gray-400 text-sm">Meticulous approach to precision in research</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center mr-3">
+                                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-white">Creative Problem Solver</h4>
+                                        <p class="text-gray-400 text-sm">Alternative approaches to technical challenges</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="py-20 section">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Research & Publications</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Innovative research at the intersection of human motion and artificial intelligence</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Publication Card 1 -->
+                <div class="service-card card-bg h-full overflow-hidden rounded-lg group">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded font-bold">2024</span>
+                            <span class="text-xs text-gray-500">WORKSHOP</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">ShoeTect2.0: Real-Time HAR with MobileNet CNN</h3>
+                        <p class="text-sm text-gray-400 mb-4">R Schlonsak, T Yang, M Gabrecht, DJC Matthies</p>
+                        <p class="text-sm text-gray-500 mb-6">SBARAI International Workshop, 2024</p>
+                        
+                        <div class="mb-6 flex-grow flex items-center justify-center">
+                            <div class="w-full h-36 bg-gray-800 rounded-lg relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 200 150">
+                                    <rect x="20" y="130" width="15" height="10" fill="#3a86ff" rx="2">
+                                        <animate attributeName="height" from="0" to="10" dur="0.5s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="45" y="120" width="15" height="20" fill="#8338ec" rx="2">
+                                        <animate attributeName="height" from="0" to="20" dur="0.5s" begin="0.1s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="70" y="90" width="15" height="50" fill="#06ffa5" rx="2">
+                                        <animate attributeName="height" from="0" to="50" dur="0.5s" begin="0.2s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="95" y="70" width="15" height="70" fill="#ffbe0b" rx="2">
+                                        <animate attributeName="height" from="0" to="70" dur="0.5s" begin="0.3s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="120" y="100" width="15" height="40" fillfb3516" rx="2">
+                                        <animate attributeName="height" from="0" to="40" dur="0.5s" begin="0.4s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="145" y="60" width="15" height="80" fill="#3a86ff" rx="2">
+                                        <animate attributeName="height" from="0" to="80" dur="0.5s" begin="0.5s" fill="freeze"/>
+                                    </rect>
+                                    <rect x="170" y="80" width="15" height="60" fill="#8338ec" rx="2">
+                                        <animate attributeName="height" from="0" to="60" dur="0.5s" begin="0.6s" fill="freeze"/>
+                                    </rect>
+                                    <text x="100" y="145" text-anchor="middle" fill="white" font-family="monospace" font-size="12" opacity="0">Smart Footwear CNNtext>
+                                    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1s" fill="freeze"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-auto">
+                            <a href="#" class="text-blue-500 hover:text-blue-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                Paper
+                            </a>
+                            <a href="#" class="text-green-500 hover:text-green-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                Code
+                            </a>
+                            <a href="#" class="text-purple-500 hover:text-purple-400 font-medium text-sm flex items-center group/link">
+                                <span class="bg-purple-500/20 px-2 py-1 rounded">HAR</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication Card 2 -->
+                <div class="service-card card-bg h-full overflow-hidden rounded-lg group">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded font-bold">2024</span>
+                            <span class="text-xs text-gray-500">WORKSHOP</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">SurfSole: Surface ID via Capacitive Sensing</h3>
+                        <p class="text-sm text-gray-400 mb-4">P Willnow, M Sternitzke, R Schlonsak, M Gabrecht</p>
+                        <p class="text-sm text-gray-500 mb-6">SBARAI International Workshop, 2024</p>
+                        
+                        <div class="mb-6 flex-grow flex items-center justify-center">
+                            <div class="w-full h-36 bg-gray-800 rounded-lg p-4 flex items-center justify-center">
+                                <div class="grid grid-cols-3 gap-2 animate-pulse">
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                    <div class="w-8 h-8 bg-purple-500/50 rounded"></div>
+                                    <div class="w-8 h-8 bg-blue-500/30 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-auto">
+                            <a href="#" class="text-blue-500 hover:text-blue-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                Paper
+                            </a>
+                            <a href="#" class="text-green-500 hover:text-green-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                Code
+                            </a>
+                            <a href="#" class="text-purple-500 hover:text-purple-400 font-medium text-sm flex items-center group/link">
+                                <span class="bg-purple-500/20 px-2 py-1 rounded">Sensors</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Publication Card 3 -->
+                <div class="service-card card-bg h-full overflow-hidden rounded-lg group">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded font-bold">2024</span>
+                            <span class="text-xs text-gray-500">JOURNAL</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Bridge Detection in Autonomous Shipping</h3>
+                        <p class="text-sm text-gray-400 mb-4">R Schlonsak, JP Schreiter, H Hellbrück</p>
+                        <p class="text-sm text-gray-500 mb-6">Journal of Physics: Conference Series, 2024</p>
+                        
+                        <div class="mb-6 flex-grow flex items-center justify-center">
+                            <div class="w-full h-36 bg-gray-800 rounded-lg overflow-hidden relative">
+                                <img src="https://picsum.photos/seed/bridge/660/300" alt="Bridge detection visualization" class="w-full h-full object-cover opacity-40">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="bg-black/50 p-4 rounded-lg">
+                                        <span class="text-white mono-font text-sm">YOLOv8 Detection Model</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-auto">
+                            <a href="#" class="text-blue-500 hover:text-blue-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                Paper
+                            </a>
+                            <a href="#" class="text-green-500 hover:text-green-400 font-medium text-sm flex items-center group/link">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684zM3 9a2 2 0 100 4h.01a2 2 0 002-2V9a2 2 0 00-2-2H3z" clip-rule="evenodd"></path></svg>
+                                Dataset
+                            </a>
+                            <a href="#" class="text-purple-500 hover:text-purple-400 font-medium text-sm flex items-center group/link">
+                                <span class="bg-purple-500/20 px-2 py-1 rounded">Autonomy</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 section bg-gray-800/20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Side Projects</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Exploring creative and technical challenges beyond my research</p>
+            
+            <!-- Project Filter Tabs -->
+            <div class="flex flex-wrap justify-center mb-8 gap-2">
+                <button class="project-filter px-4 py-2 rounded-full bg-blue-600/20 text-blue-400 tab-active" data-filter="all">All</button>
+                <button class="project-filter px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-filter="ai">AI</button>
+                <button class="project-filter px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-filter="web">Web</button>
+                <button class="project-filter px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-filter="music">Music</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-item" data-category="ai">
+                    <div class="service-card card-bg rounded-lg overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-br from-blue-600 to-purple-700 p-4 flex items-center justify-center">
+                            <canvas id="rnn-visual" width="140" height="140"></canvas>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-white">AI-Powered Chord Suggester</h3>
+                                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">AI</span>
+                            </div>
+                            <p class="text-gray-300 mb-4 text-sm">Web app using RNN to suggest chord progressions based on popular songs</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag mono-font text-xs">Python</span>
+                                <span class="tech-tag mono-font text-xs">TensorFlow</span>
+                                <span class="tech-tag mono-font text-xs">Flask</span>
+                                <span class="tech-tag mono-font text-xs">RNN</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <a href="#" class="text-blue-500 hover:text-blue-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    GitHub
+                                </a>
+                                <a href="#" class="text-green-500 hover:text-green-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 2 -->
+                <div class="project-item" data-category="web">
+                    <div class="service-card card-bg rounded-lg overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-br from-green-600 to-teal-700 p-4 flex items-center justify-center relative overflow-hidden">
+                            <div class="relative">
+                                <div class="w-28 h-8 bg-gray-800/80 backdrop-blur-sm rounded-md flex items-center justify-center">
+                                    <span class="text-white mono-font text-sm">IMU Dataspan>
+                                </div>
+                                <div class="absolute -bottom-8 left-0 right-0 h-20 flex items-end justify-around px-2">
+                                    <div class="h-4 w-2 bg-green-400 animate-pulse"></div>
+                                    <div class="h-8 w-2 bg-green-400 animate-pulse" style="animation-delay: 0.1s"></div>
+                                    <div class="h-6 w-2 bg-green-400 animate-pulse" style="animation-delay: 0.2s"></div>
+                                    <div class="h-10 w-2 bg-green-400 animate-pulse" style="animation-delay: 0.3s"></div>
+                                    <div class="h-7 w-2 bg-green-400 animate-pulse" style="animation-delay: 0.4s"></div>
+                                    <div class="h-9 w-2 bg-green-400 animate-pulse" style="animation-delay: 0.5s"></div>
+                                </div>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-20">
+                                <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-white">IMU Data Visualizer</h3>
+                                <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">VISUALIZATION</span>
+                            </div>
+                            <p class="text-gray-300 mb-4 text-sm">Python tool using Matplotlib to visualize real-time IMU sensor data</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag mono-font text-xs">Python</span>
+                                <span class="tech-tag mono-font text-xs">PyQt</span>
+                                <span class="tech-tag mono-font text-xs">Matplotlib</span>
+                                <span class="tech-tag mono-font text-xs">IMU</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <a href="#" class="text-blue-500 hover:text-blue-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    GitHub
+                                </a>
+                                <a href="#" class="text-green-500 hover:text-green-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 3 -->
+                <div class="project-item" data-category="music">
+                    <div class="service-card card-bg rounded-lg overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-600 p-6 flex items-center justify-center">
+                            <div class="w-full h-full bg-black/20 backdrop-blur-sm rounded-lg flex items-center justify-center relative overflow-hidden">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-1 h-10 bg-purple-400 rounded animate-pulse" style="animation-delay: 0s"></div>
+                                    <div class="w-1 h-14 bg-purple-400 rounded animate-pulse" style="animation-delay: 0.1s"></div>
+                                    <div class="w-1 h-7 bg-purple-400 rounded animate-pulse" style="animation-delay: 0.2s"></div>
+                                    <div class="w-1 h-11 bg-purple-400 rounded animate-pulse" style="animation-delay: 0.3s"></div>
+                                    <div class="w-1 h-9 bg-purple-400 rounded animate-pulse" style="animation-delay: 0.4s"></div>
+                                </div>
+                                <div class="absolute top-2 right-2">
+                                    <svg class="w-8 h-8 text-white opacity-30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-white">Acoustic Guitar Covers</h3>
+                                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">MUSIC</span>
+                            </div>
+                            <p class="text-gray-300 mb-4 text-sm">Collection of fingerstyle acoustic guitar covers of popular songs</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag mono-font text-xs">Music</span>
+                                <span class="tech-tag mono-font text-xs">Fingerstyle</span>
+                                <span class="tech-tag mono-font text-xs">Guitar</span>
+                                <span class="tech-tag mono-font text-xs">YouTube</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <a href="#" class="text-green-500 hover:text-green-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                    SoundCloud
+                                </a>
+                                <a href="#" class="text-red-500 hover:text-red-400 text-sm font-bold flex items-center group/link">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                    YouTube
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Music Player Mockup -->
+            <div class="mt-16 max-w-4xl mx-auto p-8 bg-gray-800/30 rounded-xl border border-gray-700">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">Featured Tracks</h3>
+                <div class="bg-gray-800 rounded-lg p-4 flex items-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-medium text-white">Hotel California</h4>
+                        <p class="text-sm text-gray-400">Fingerstyle Cover</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"></path></svg>
+                        </button>
+                        <button class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                        </button>
+                        <button class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog Section -->
+        <section id="topics" class="py-20 section">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">AI Thoughts & Musings</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Insights, experiences, and reflections on AI, technology, and research</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Blog Post 1 -->
+                <article class="service-card card-bg p-6 rounded-lg group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-1 h-1 full rounded-full bg-blue-500 mr-2"></div>
+                            <span class="text-sm text-gray-500">June 25, 2024</span>
+                        </div>
+                        <span class="text-xs text-gray-500">5 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">The Challenge of Real-World Sensor Data</h3>
+                    <div class="mb-4">
+                        <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">AI Research</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Working with sensors in the wild presents unique challenges. Noise, variability, and the need for real-time processing demand robust and efficient models. In this post, I explore how we're addressing these challenges in smart footwear projects.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-blue-500 hover:text-blue-400 font-medium flex items-center group/link">
+                            Read More
+                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post 2 -->
+                <article class="service-card card-bg p-6 rounded-lg group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-1 h-1 full rounded-full bg-purple-500 mr-2"></div>
+                            <span class="text-sm text-gray-500">May 2, 2024</span>
+                        </div>
+                        <span class="text-xs text-gray-500">7 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Why Lightweight CNNs are a Game-Changer for Wearables</h3>
+                    <div class="mb-4">
+                        <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">Deep Learning</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Models like MobileNet are crucial for bringing powerful AI directly to edge devices like smart shoes. This enables on-device processing, improving privacy and reducing latency. I dive into the specifics of model optimization.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-blue-500 hover:text-blue-400 font-medium flex items-center group/link">
+                            Read More
+                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post 3 -->
+                <article class="service-card card-bg p-6 rounded-lg group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-1 h-1 full rounded-full bg-green-500 mr-2"></div>
+                            <span class="text-sm text-gray-500">March 15, 2024</span>
+                        </div>
+                        <span class="text-xs text-gray-500">6 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Harmonizing AI and Music: The Creative Intersection</h3>
+                    <div class="mb-4">
+                        <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">Music & AI</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        How AI is transforming music creation and my journey building an AI chord progression tool. This post explores the technical aspects while touching on the creative and philosophical implications of AI in music.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-blue-500 hover:text-blue-400 font-medium flex items-center group/link">
+                            Read More
+                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post 4 -->
+                <article class="service-card card-bg p-6 rounded-lg group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-1 h-1 full rounded-full bg-yellow-500 mr-2"></div>
+                            <span class="text-sm text-gray-500">January 30, 2024</span>
+                        </div>
+                        <span class="text-xs text-gray-500">4 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Bridging Research and Industry: Lessons from My Work</h3>
+                    <div class="mb-4">
+                        <span class="text-xs text-blue-500 bg-blue-500/10 px-2 py-1 rounded">Career</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Reflections on my journey from academia to industry and back again. This post shares insights on how to make research impactful and the importance of communication skills in technical roles.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-blue-500 hover:text-blue-400 font-medium flex items-center group/link">
+                            Read More
+                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <div class="flex gap-4">
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="#" class="text-gray-500 hover:text-blue-500 group/link">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 022-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <div class="mt-16 max-w-2xl mx-auto p-8 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl border border-gray-700">
+                <h3 class="text-2xl font-bold text-center text-white mb-2">Subscribe to My Newsletter</h3>
+                <p class="text-gray-400 text-center mb-6">Get weekly insights on AI, research, and technology straight to your inbox</p>
+                <form class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required>
+                    <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 section bg-gray-800/20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Let's Connect</h2>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">I'm always open to discussing research, technology, potential collaborations, or even just music. Feel free to reach out!</p>
+            
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Get In Touch</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="service-bg card-bg p-6 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="text-lg font-medium text-white">Email</h4>
+                                    <a href="mailto:ruben.schlonsak@th-luebeck.de" class="text-gray-400 hover:text-blue-400 transition-colors">ruben.schlonsak@th-luebeck.de</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-bg card-bg p-6 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="text-lg font-medium text-white">Location</h4>
+                                    <p class="text-gray-400">Lübeck, Germany</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-bg card-bg p-6 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-1">
+                                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="text-lg font-medium text-white">Collaborations</h4>
+                                    <p class="text-gray-400">Open to research partnerships</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-lg font-bold text-white mt-8 mb-4">Connect with Me</h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.866 7.915 6.736 9.143.491.09.67-.213.67-.472 0-.232-.009-.848-.014-1.664-2.782.604-3.37-1.34-3.37-1.34-.447-1.137-1.092-1.44-1.092-1.44-.893-.61.068-.059.068-.059.987.07 1.507 1.013 1.507 1.013.877 1.503 2.298 1.068 2.858.817.09-.635.342-1.068.622-1.313-2.18-.248-4.467-1.09-4.467-4.854 0-1.07.382-1.947 1.01-2.632-.102-.248-.437-1.245.096-2.595 0 0 .823-.263 2.693.998.783-.217 1.625-.327 2.46-.33.835.003 1.677.113 2.46.33 1.87-1.26 2.693-.998 2.693-.998.535 1.35.198 2.347.096 2.595.63.685 1.01 1.562 1.01 2.632 0 3.774-2.29 4.604-4.475 4.844.354.305.67.91.67 1.832 0 1.313-.012 2.373-.012 2.695 0 .26.178.566.674.47C19.138 19.915 22 16.286 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477 4.072 4.072 0 01-1.837-.514v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19.333 2H4.667A2.669 2.669 0 002 4.667v14.666A2.669 2.669 0 004.667 22h14.666A2.669 2.669 0 0022 19.333V4.667A2.669 2.669 0 0019.333 2zM8.667 18H5.333V9h3.334v9zm-1.667-10.11a1.917 1.917 0 110-3.833 1.917 1.917 0 010 3.833zM18.667 18h-3.333v-4.444c0-1.057-.02-2.417-1.474-2.417-1.474 0-1.701 1.15-1.701 2.34V18h-3.333V9h3.193v1.448h.045c.439-.833 1.514-1.708 3.148-1.708 3.368 0 3.988 2.216 3.988 5.096V18z" clip-rule="evenodd"></path></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-gray-800 pb-8">
+        <div class="container mx-auto px-6 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-white flex items-center">
+                        <span class="mr-2 text-3xl font-bold">R</span>
+                        <span>S</span>
+                    </a>
+                    <p class="text-gray-500 text-sm mt-2">© 2024 Ruben Schlonsak. All Rights Reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#about" class="text-gray-500 hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="text-gray-500 hover:text-white transition-colors">Skills</a>
+                    <a href="#research" class="text-gray-500 hover:text-white transition-colors">Research</a>
+                    <a href="#projects" class="text-gray-500 hover:text-white transition-colors">Projects</a>
+                    <a href="#blog" class="text-gray-500 hover:text-white transition-colors">Blog</a>
+                    <a href="#contact" class="text-gray-500 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg transform scale-0 transition-transform duration-300 z-50">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <script type="module">
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const darkModeIcon = document.getElementById('dark-mode-icon');
+        const lightModeIcon = document.getElementById('light-mode-icon');
+        const body = document.body;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'false') {
+            body.classList.remove('dark-mode');
+            darkModeIcon.classList.add('hidden');
+            lightModeIcon.classList.remove('hidden');
+        } else {
+            body.classList.add('dark-mode');
+            darkModeIcon.classList.remove('hidden');
+            lightModeIcon.classList.add('hidden');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                darkModeIcon.classList.add('hidden');
+                lightModeIcon.classList.remove('hidden');
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                body.classList.add('dark-mode');
+                darkModeIcon.classList.remove('hidden');
+                lightModeIcon.classList.add('hidden');
+                localStorage.setItem('darkMode', 'true');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Add shadow to header on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+        
+        // Active navigation link highlighting on scroll
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: "-30% 0px -70% 0px" });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('scale-0');
+                backToTopButton.classList.add('scale-100');
+            } else {
+                backToTopButton.classList.remove('scale-100');
+                backToTopButton.classList.add('scale-0');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Particles background
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 100;
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speedX: Math.random() * 0.5 - 0.25,
+                speedY: Math.random() * 0.5 - 0.25,
+                color: Math.random() > 0.5 ? '#3a86ff' : '#8338ec'
+            });
+        }
+        
+        // Draw particles
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                ctx.fillStyle = particle.color + '80';
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Move particles
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                
+                // Wrap around edges
+                if (particle.x > canvas.width) particle.x = 0;
+                if (particle.x < 0) particle.x = canvas.width;
+                if (particle.y > canvas.height) particle.y = 0;
+                if (particle.y < 0) particle.y = canvas.height;
+            });
+            
+            // Draw connections
+            particles.forEach((particle1, i) => {
+                particles.slice(i + 1).forEach(particle2 => {
+                    const dx = particle1.x - particle2.x;
+                    const dy = particle1.y - particle2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        const opacity = 1 - distance / 100;
+                        ctx.strokeStyle = `rgba(58, 134, 255, ${opacity * 0.2})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particle1.x, particle1.y);
+                        ctx.lineTo(particle2.x, particle2.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            requestAnimationFrame(drawParticles);
+        }
+        
+        drawParticles();
+        
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Typing effect
+        const typingTexts = [
+            "I'm a researcher passionate about understanding human activity through smart footwear",
+            "Exploring the frontiers of AI and machine learning for real-world applications",
+            "Turning sensor data into meaningful insights with intelligent algorithms",
+            "Creating the bridge between human motion and artificial intelligence"
+        ];
+        
+        const typingElement = document.getElementById('typing-text');
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeText() {
+            const currentText = typingTexts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typeSpeed = 100;
+            
+            if (isDeleting) {
+                typeSpeed /= 2;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typingTexts.length;
+                typeSpeed = 500;
+            }
+            
+            typingElement.classList.add('typing-effect');
+            setTimeout(() => {
+                typeText();
+            }, typeSpeed);
+        }
+        
+        typeText();
+        
+        // Sensor visualization
+        const sensorCanvas = document.getElementById('sensor-visualization');
+        const sensorCtx = sensorCanvas.getContext('2d');
+        let sensorData = [];
+        const maxDataPoints = 50;
+        
+        // Initialize sensor data
+        for (let i = 0; i < maxDataPoints; i++) {
+            sensorData.push(Math.random() * 100);
+        }
+        
+        function drawSensorVisualization() {
+            sensorCtx.clearRect(0, 0, sensorCanvas.width, sensorCanvas.height);
+            
+            // Add new data point
+            sensorData.shift();
+            sensorData.push(Math.random() * 100);
+            
+            // Draw grid
+            sensorCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            sensorCtx.lineWidth = 1;
+            
+            for (let i = 0; i < 5; i++) {
+                const y = (i * 28) + 14;
+                sensorCtx.beginPath();
+                sensorCtx.moveTo(0, y);
+                sensorCtx.lineTo(sensorCanvas.width, y);
+                sensorCtx.stroke();
+            }
+            
+            // Draw sensor data
+            const gradient = sensorCtx.createLinearGradient(0, 0, 0, sensorCanvas.height);
+            gradient.addColorStop(0, '#3a86ff');
+            gradient.addColorStop(1, '#8338ec');
+            
+            sensorCtx.strokeStyle = gradient;
+            sensorCtx.lineWidth = 2;
+            
+            sensorCtx.beginPath();
+            sensorCtx.moveTo(0, sensorCanvas.height - (sensorData[0] / 100) * sensorCanvas.height * 0.8);
+            
+            // Draw line
+            for (let i = 1; i < sensorData.length; i++) {
+                const x = (i / (sensorData.length - 1)) * sensorCanvas.width;
+                const y = sensorCanvas.height - (sensorData[i] / 100) * sensorCanvas.height * 0.8;
+                sensorCtx.lineTo(x, y);
+            }
+            
+            sensorCtx.stroke();
+            
+            // Draw point at the end
+            const lastX = ((sensorData.length - 1) / (sensorData.length - 1)) * sensorCanvas.width;
+            const lastY = sensorCanvas.height - (sensorData[sensorData.length - 1] / 100) * sensorCanvas.height * 0.8;
+            
+            sensorCtx.fillStyle = '#ffffff';
+            sensorCtx.beginPath();
+            sensorCtx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+            sensorCtx.fill();
+            
+            requestAnimationFrame(drawSensorVisualization);
+        }
+        
+        drawSensorVisualization();
+        
+        // RNN visualization
+        const rnnCanvas = document.getElementById('rnn-visual');
+        const rnnCtx = rnnCanvas.getContext('2d');
+        let rnnNodes = [];
+        const nrnnNodes = 15;
+        
+        // Initialize RNN nodes
+        for (let i = 0; i < nrnnNodes; i++) {
+            rnnNodes.push({
+                x: Math.random() * rnnCanvas.width,
+                y: Math.random() * rnnCanvas.height,
+                vx: Math.random() * 0.5 - 0.25,
+                vy: Math.random() * 0.5 - 0.25,
+                size: Math.random() * 4 + 2,
+                connections: []
+            });
+            
+            // Create connections
+            const connectionCount = Math.floor(Math.random() * 3) + 1;
+            for (let j = 0; j < connectionCount; j++) {
+                const nodeIndex = Math.floor(Math.random() * nrnnNodes);
+                if (nodeIndex !== i && !rnnNodes[i].connections.includes(nodeIndex)) {
+                    rnnNodes[i].connections.push(nodeIndex);
+                }
+            }
+        }
+        
+        function drawRNN() {
+            rnnCtx.clearRect(0, 0, rnnCanvas.width, rnnCanvas.height);
+            
+            // Draw connections
+            rnnCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            rnnCtx.lineWidth = 1;
+            
+            rnnNodes.forEach((node, i) => {
+                node.connections.forEach(connectionIndex => {
+                    rnnCtx.beginPath();
+                    rnnCtx.moveTo(node.x, node.y);
+                    rnnCtx.lineTo(rnnNodes[connectionIndex].x, rnnNodes[connectionIndex].y);
+                    rnnCtx.stroke();
+                });
+            });
+            
+            // Draw nodes
+            rnnNodes.forEach(node => {
+                // Move nodes
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                // Bounce off walls
+                if (node.x < 0 || node.x > rnnCanvas.width) {
+                    node.vx *= -1;
+                }
+                if (node.y < 0 || node.y > rnnCanvas.height) {
+                    node.vy *= -1;
+                }
+                
+                // Draw node
+                const gradient = rnnCtx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.size);
+                gradient.addColorStop(0, '#3a86ff');
+                gradient.addColorStop(1, '#8338ec');
+                
+                rnnCtx.fillStyle = gradient;
+                rnnCtx.beginPath();
+                rnnCtx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+                rnnCtx.fill();
+            });
+            
+            requestAnimationFrame(drawRNN);
+        }
+        
+        drawRNN();
+        
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Update button styles
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                });
+                
+                button.classList.add('tab-active');
+                button.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                
+                // Update content visibility
+                tabContents.forEach(content => {
+                    if (content.id === tabId) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.getAttribute('data-width');
+                    entry.target.style.width = width;
+                }
+            });
+        }, observerOptions);
+        
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+        
+        // Project filtering
+        const projectFilters = document.querySelectorAll('.project-filter');
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        projectFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                const filterCategory = filter.getAttribute('data-filter');
+                
+                // Update button styles
+                projectFilters.forEach(btn => {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                });
+                
+                filter.classList.add('tab-active');
+                filter.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                
+                // Filter projects
+                projectItems.forEach(item => {
+                    if (filterCategory === 'all' || item.getAttribute('data-category') === filterCategory) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Contact form
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show a success message
+            const sentMessage = document.createElement('div');
+            sentMessage.className = 'mt-4 p-3 bg-green-600/20 border border-green-600 text-green-400 rounded-lg text-center flex items-center justify-center';
+            sentMessage.innerHTML = `
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Thank you for your message! I'll get back to you soon.
+            `;
+            
+            contactForm.appendChild(sentMessage);
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                contactForm.removeChild(sentMessage);
+            }, 5000);
+        });
+        
+        // Animate elements on scroll
+        const animatedElements = document.querySelectorAll('.service-card');
+        
+        const elementObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            elementObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
