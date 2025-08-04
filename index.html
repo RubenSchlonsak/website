@@ -937,83 +937,57 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Let's Connect</h2>
             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">I'm always open to discussing research, technology, potential collaborations, or even just music. Feel free to reach out!</p>
             
-            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Get In Touch</h3>
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-gray-300 mb-2">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-gray-300 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-                
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
-                    <div class="space-y-6">
-                        <div class="service-bg card-bg p-6 rounded-lg">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4 mt-1">
-                                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h4 class="text-lg font-medium text-white">Email</h4>
-                                    <a href="mailto:ruben.schlonsak@th-luebeck.de" class="text-gray-400 hover:text-blue-400 transition-colors">ruben.schlonsak@th-luebeck.de</a>
-                                </div>
+            <div class="max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">Contact Information</h3>
+                <div class="space-y-6">
+                    <div class="service-bg card-bg p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             </div>
-                        </div>
-                        
-                        <div class="service-bg card-bg p-6 rounded-lg">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4 mt-1">
-                                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h4 class="text-lg font-medium text-white">Location</h4>
-                                    <p class="text-gray-400">Lübeck, Germany</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="service-bg card-bg p-6 rounded-lg">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-1">
-                                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                                </div>
-                                <div class="flex-grow">
-                                    <h4 class="text-lg font-medium text-white">Collaborations</h4>
-                                    <p class="text-gray-400">Open to research partnerships</p>
-                                </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-medium text-white">Email</h4>
+                                <a href="mailto:ruben.schlonsak@th-luebeck.de" class="text-gray-400 hover:text-blue-400 transition-colors">ruben.schlonsak@th-luebeck.de</a>
                             </div>
                         </div>
                     </div>
                     
-                    <h4 class="text-lg font-bold text-white mt-8 mb-4">Connect with Me</h4>
-                    <div class="flex space-x-3">
-                        <a href="https://github.com/RubenSchlonsak" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
-                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.866 7.915 6.736 9.143.491.09.67-.213.67-.472 0-.232-.009-.848-.014-1.664-2.782.604-3.37-1.34-3.37-1.34-.447-1.137-1.092-1.44-1.092-1.44-.893-.61.068-.059.068-.059.987.07 1.507 1.013 1.507 1.013.877 1.503 2.298 1.068 2.858.817.09-.635.342-1.068.622-1.313-2.18-.248-4.467-1.09-4.467-4.854 0-1.07.382-1.947 1.01-2.632-.102-.248-.437-1.245.096-2.595 0 0 .823-.263 2.693.998.783-.217 1.625-.327 2.46-.33.835.003 1.677.113 2.46.33 1.87-1.26 2.693-.998 2.693-.998.535 1.35.198 2.347.096 2.595.63.685 1.01 1.562 1.01 2.632 0 3.774-2.29 4.604-4.475 4.844.354.305.67.91.67 1.832 0 1.313-.012 2.373-.012 2.695 0 .26.178.566.674.47C19.138 19.915 22 16.286 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
-                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477 4.072 4.072 0 01-1.837-.514v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ruben-schlonsak-ba5925375/"  target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
-                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19.333 2H4.667A2.669 2.669 0 002 4.667v14.666A2.669 2.669 0 004.667 22h14.666A2.669 2.669 0 0022 19.333V4.667A2.669 2.669 0 0019.333 2zM8.667 18H5.333V9h3.334v9zm-1.667-10.11a1.917 1.917 0 110-3.833 1.917 1.917 0 010 3.833zM18.667 18h-3.333v-4.444c0-1.057-.02-2.417-1.474-2.417-1.474 0-1.701 1.15-1.701 2.34V18h-3.333V9h3.193v1.448h.045c.439-.833 1.514-1.708 3.148-1.708 3.368 0 3.988 2.216 3.988 5.096V18z" clip-rule="evenodd"></path></svg>
-                        </a>
-                        <a href="https://github.com/RubenSchlonsak"  target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
-                            <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
+                    <div class="service-bg card-bg p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-medium text-white">Location</h4>
+                                <p class="text-gray-400">Lübeck, Germany</p>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="service-bg card-bg p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-lg font-medium text-white">Collaborations</h4>
+                                <p class="text-gray-400">Open to research partnerships</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="text-lg font-bold text-white mt-8 mb-4 text-center">Connect with Me</h4>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://github.com/RubenSchlonsak" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                        <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.286 2.866 7.915 6.736 9.143.491.09.67-.213.67-.472 0-.232-.009-.848-.014-1.664-2.782.604-3.37-1.34-3.37-1.34-.447-1.137-1.092-1.44-1.092-1.44-.893-.61.068-.059.068-.059.987.07 1.507 1.013 1.507 1.013.877 1.503 2.298 1.068 2.858.817.09-.635.342-1.068.622-1.313-2.18-.248-4.467-1.09-4.467-4.854 0-1.07.382-1.947 1.01-2.632-.102-.248-.437-1.245.096-2.595 0 0 .823-.263 2.693.998.783-.217 1.625-.327 2.46-.33.835.003 1.677.113 2.46.33 1.87-1.26 2.693-.998 2.693-.998.535 1.35.198 2.347.096 2.595.63.685 1.01 1.562 1.01 2.632 0 3.774-2.29 4.604-4.475 4.844.354.305.67.91.67 1.832 0 1.313-.012 2.373-.012 2.695 0 .26.178.566.674.47C19.138 19.915 22 16.286 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ruben-schlonsak-ba5925375/" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                        <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19.333 2H4.667A2.669 2.669 0 002 4.667v14.666A2.669 2.669 0 004.667 22h14.666A2.669 2.669 0 0022 19.333V4.667A2.669 2.669 0 0019.333 2zM8.667 18H5.333V9h3.334v9zm-1.667-10.11a1.917 1.917 0 110-3.833 1.917 1.917 0 010 3.833zM18.667 18h-3.333v-4.444c0-1.057-.02-2.417-1.474-2.417-1.474 0-1.701 1.15-1.701 2.34V18h-3.333V9h3.193v1.448h.045c.439-.833 1.514-1.708 3.148-1.708 3.368 0 3.988 2.216 3.988 5.096V18z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=XXXXXXXX" target="_blank" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+                        <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5 12 0z"/></svg>
+                    </a>
                 </div>
             </div>
         </section>
