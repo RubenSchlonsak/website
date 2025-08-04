@@ -112,7 +112,12 @@
         }
         
         .tab-active {
-            background: var(--primary-color);
+            background: var(--primary-color) !important;
+            color: white !important;
+        }
+        
+        .tab-btn {
+            transition: all 0.3s ease;
         }
         
         #particles-canvas {
@@ -411,9 +416,9 @@
             
             <div class="max-w-5xl mx-auto">
                 <div class="tabs flex flex-wrap justify-center mb-8 gap-2">
-                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-blue-600/20 text-blue-400 tab-active" data-tab="technical">Technical</button>
-                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-tab="research">Research</button>
-                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors" data-tab="soft">Soft Skills</button>
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-blue-600 text-white tab-active" data-tab="technical">Technical</button>
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors" data-tab="research">Research</button>
+                    <button class="tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors" data-tab="soft">Soft Skills</button>
                 </div>
                 
                 <!-- Technical Skills -->
@@ -781,6 +786,7 @@
 
             </div>
         </section>
+
 <!-- Topics Section -->
 <section id="topics" class="py-20 section">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Research Topics</h2>
@@ -1322,80 +1328,7 @@
         
         drawSensorVisualization();
         
-        // RNN visualization
-        const rnnCanvas = document.getElementById('rnn-visual');
-        const rnnCtx = rnnCanvas.getContext('2d');
-        let rnnNodes = [];
-        const nrnnNodes = 15;
-        
-        // Initialize RNN nodes
-        for (let i = 0; i < nrnnNodes; i++) {
-            rnnNodes.push({
-                x: Math.random() * rnnCanvas.width,
-                y: Math.random() * rnnCanvas.height,
-                vx: Math.random() * 0.5 - 0.25,
-                vy: Math.random() * 0.5 - 0.25,
-                size: Math.random() * 4 + 2,
-                connections: []
-            });
-            
-            // Create connections
-            const connectionCount = Math.floor(Math.random() * 3) + 1;
-            for (let j = 0; j < connectionCount; j++) {
-                const nodeIndex = Math.floor(Math.random() * nrnnNodes);
-                if (nodeIndex !== i && !rnnNodes[i].connections.includes(nodeIndex)) {
-                    rnnNodes[i].connections.push(nodeIndex);
-                }
-            }
-        }
-        
-        function drawRNN() {
-            rnnCtx.clearRect(0, 0, rnnCanvas.width, rnnCanvas.height);
-            
-            // Draw connections
-            rnnCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-            rnnCtx.lineWidth = 1;
-            
-            rnnNodes.forEach((node, i) => {
-                node.connections.forEach(connectionIndex => {
-                    rnnCtx.beginPath();
-                    rnnCtx.moveTo(node.x, node.y);
-                    rnnCtx.lineTo(rnnNodes[connectionIndex].x, rnnNodes[connectionIndex].y);
-                    rnnCtx.stroke();
-                });
-            });
-            
-            // Draw nodes
-            rnnNodes.forEach(node => {
-                // Move nodes
-                node.x += node.vx;
-                node.y += node.vy;
-                
-                // Bounce off walls
-                if (node.x < 0 || node.x > rnnCanvas.width) {
-                    node.vx *= -1;
-                }
-                if (node.y < 0 || node.y > rnnCanvas.height) {
-                    node.vy *= -1;
-                }
-                
-                // Draw node
-                const gradient = rnnCtx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.size);
-                gradient.addColorStop(0, '#3a86ff');
-                gradient.addColorStop(1, '#8338ec');
-                
-                rnnCtx.fillStyle = gradient;
-                rnnCtx.beginPath();
-                rnnCtx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
-                rnnCtx.fill();
-            });
-            
-            requestAnimationFrame(drawRNN);
-        }
-        
-        drawRNN();
-        
-        // Tab functionality
+        // Tab functionality - FIXED VERSION
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         
@@ -1403,16 +1336,17 @@
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
                 
-                // Update button styles
+                // Remove active state from all buttons
                 tabButtons.forEach(btn => {
                     btn.classList.remove('tab-active');
-                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    btn.className = 'tab-btn px-6 py-2 mx-2 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors';
                 });
                 
+                // Add active state to clicked button
                 button.classList.add('tab-active');
-                button.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                button.className = 'tab-btn px-6 py-2 mx-2 rounded-full tab-active transition-colors';
                 
-                // Update content visibility
+                // Show/hide content
                 tabContents.forEach(content => {
                     if (content.id === tabId) {
                         content.classList.remove('hidden');
